@@ -11,6 +11,26 @@ Space: O(t/m), where t is target, m  is the minimum value in nums.
 from typing import List
 
 
+def combinationSum2(nums: List[int], target: int) -> List[List[int]]:
+    res, subset = [], []
+
+    nums.sort()
+
+    def dfs(i, curSum):
+        if curSum == target:
+            res.append(subset.copy())
+        if curSum > target:
+            return
+
+        for j in range(i, len(nums)):
+            subset.append(nums[j])
+            dfs(j, curSum + nums[j])
+            subset.pop()
+
+    dfs(0, 0)
+
+    return res
+
 def combinationSum(nums: List[int], target: int) -> List[List[int]]:
     comb, currComb = [],[]
 
