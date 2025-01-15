@@ -11,6 +11,24 @@ from typing import List
 
 
 class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        sub, res = [], []
+
+        def dfs(i, curSum):
+            if curSum == target:
+                res.append(sub.copy())
+                return
+            if i > len(candidates):
+                return
+
+            for j in range(i, len(candidates)):
+                sub.append(candidates[i])
+                dfs(j + 1)
+                sub.pop()
+
+        dfs(0, 0)
+        return res
+
     def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
         comb, curCombs = [], []
         candidates.sort()
